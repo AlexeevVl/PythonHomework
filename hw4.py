@@ -24,15 +24,19 @@ def data_range(start_date,end_date):
     if start_date>end_date:
         return []
     else:
-        start_date_dt = datetime.strptime(start_date, "%Y-%m-%d")
-        end_date_dt = datetime.strptime(end_date, "%Y-%m-%d")
-        temp_list=[]
-        while start_date_dt<=end_date_dt:
-            temp_list.append(start_date_dt.strftime("%Y-%m-%d"))
-            start_date_dt+=timedelta(days=+1)
-        return temp_list
+        try:
+            start_date_dt = datetime.strptime(start_date, "%Y-%m-%d")
+            end_date_dt = datetime.strptime(end_date, "%Y-%m-%d")
+            temp_list = []
+            while start_date_dt <= end_date_dt:
+                temp_list.append(start_date_dt.strftime("%Y-%m-%d"))
+                start_date_dt += timedelta(days=+1)
+            return temp_list
+        except ValueError:
+            return []
 
-print(data_range("2018-01-30","2018-01-01"))
+
+print(data_range("2018-01f-30","2018-01-01"))
 
 
 
@@ -58,8 +62,8 @@ print(chef_dates(stream))
 # Если дан 1 день месяца, то возвращается список дней прошлого месяца.
 
 def prev_dates():
-    current_date=datetime.strptime('2018-01-01',"%Y-%m-%d")
-    #current_date=datetime.today()
+    #current_date=datetime.strptime('2018-01-01',"%Y-%m-%d")
+    current_date=datetime.today()
     date_list=[]
     if current_date.day!=1:
         first_day=current_date.replace(day=1)
